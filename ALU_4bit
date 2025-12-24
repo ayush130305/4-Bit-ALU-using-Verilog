@@ -1,0 +1,20 @@
+module ALU_4bit(
+    input [3:0] A, B,
+    input [2:0] opcode,
+    output reg [7:0] ALU_Out,
+    output reg CarryOut, Zero, Overflow
+);
+
+    always @(*) begin
+        case(opcode)
+            3'b000: {CarryOut, ALU_Out[3:0]} = A + B;       // Addition
+            3'b001: {CarryOut, ALU_Out[3:0]} = A - B;       // Subtraction
+            3'b010: ALU_Out = A * B;                        // Multiplication
+            3'b011: ALU_Out = (B != 0) ? (A / B) : 8'b0;    // Division (with zero-check)
+            3'b100: ALU_Out = A & B;                        // Logical AND
+            3'b101: ALU_Out = A | B;                        // Logical OR
+            default: ALU_Out = 8'b0;
+        endcase
+        Zero = (ALU_Out == 0);
+    end
+endmodule
