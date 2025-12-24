@@ -8,10 +8,3 @@ Logical Operations: Bitwise AND, OR, XOR, and NOT.
 Status Flags: Real-time generation of Carry, Overflow, Underflow, and Zero flags for branching logic.
 Structural Modeling: Includes a custom-designed Ripple Carry Adder to optimize gate-level understanding.
 
-Opcode,Operation,Description
-000,ADD,A+B using Ripple Carry Adder
-001,SUB,A−B via 2’s Complement Addition
-010,MUL,4-bit unsigned multiplication (8-bit result)
-011,DIV,Integer division (A/B) with zero-check
-100,AND,Bitwise logical AND
-101,OR,Bitwise logical OR
