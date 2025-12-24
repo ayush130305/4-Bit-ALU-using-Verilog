@@ -1,0 +1,63 @@
+
+`timescale 1ns / 1ps
+
+module tb_ALU_4bit();
+
+    // Inputs
+    reg [3:0] A;
+    reg [3:0] B;
+    reg [2:0] opcode;
+
+    // Outputs
+    wire [7:0] ALU_Out;
+    wire CarryOut;
+    wire Zero;
+    wire Overflow;
+
+
+    ALU_4bit uut (
+        .A(A), 
+        .B(B), 
+        .opcode(opcode), 
+        .ALU_Out(ALU_Out), 
+        .CarryOut(CarryOut), 
+        .Zero(Zero), 
+        .Overflow(Overflow)
+    );
+
+    initial begin
+
+        $display("Starting ALU Simulation...");
+        A = 0; B = 0; opcode = 0;
+
+
+        #100;
+        
+        Case 1: Addition ---
+        A = 4'b1010; B = 4'b0101; opcode = 3'b000; // 10 + 5 = 15
+        #10;
+        Case 2: Addition with Carry ---
+        A = 4'b1111; B = 4'b0001; opcode = 3'b000; // 15 + 1 = 16 (Carry should be 1)
+        #10;
+
+         Case 3: Subtraction ---
+        A = 4'b1000; B = 4'b0011; opcode = 3'b001; // 8 - 3 = 5
+        #10;
+
+        4: Multiplication ---
+        A = 4'b0011; B = 4'b0100; opcode = 3'b010; // 3 * 4 = 12
+        #10;
+
+        Case 5: Division ---
+        A = 4'b1100; B = 4'b0011; opcode = 3'b011; // 12 / 3 = 4
+        #10;
+
+        Case 6: Logical AND ---
+        A = 4'b1100; B = 4'b1010; opcode = 3'b100; // 1100 & 1010 = 1000
+        #10;
+
+        $display("Simulation Finished.");
+        $finish;
+    end
+      
+endmodule
